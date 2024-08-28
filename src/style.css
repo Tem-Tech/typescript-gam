@@ -1,7 +1,9 @@
 body {
   display: grid;
   place-items: center;
-  background: pink;
+  background: rgb(45, 81, 119);
+  text-align: center;
+  margin: auto;
   /* ul {
       display: grid;
       place-items: center;
@@ -25,26 +27,50 @@ body {
 body h1 {
   text-align: center;
   margin: 20px 0 20px 0;
-  color: maroon;
+  color: #CFCA43;
+  font-family: "Press Start 2P", system-ui;
 }
 body h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: maroon;
+  color: #CFCA43;
+  font-family: "Press Start 2P", system-ui;
 }
 body #board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(7, 1fr);
-  width: 630px;
-  height: 540px;
-  background-color: rgb(198, 74, 159);
-  display: flex;
-  flex-wrap: wrap;
+  padding: 1rem;
+  background-color: #18293a;
+  border-radius: 5%;
+  margin: auto;
 }
 body .tile {
-  height: 70px;
-  width: 70px;
-  margin: 5px;
-  background-color: rgb(250, 230, 233);
+  height: 3.5rem;
+  width: 3.5rem;
+  background-color: whitesmoke;
   border-radius: 50%;
-  border: 1px solid orange;
+  border: 1px solid gray;
+  margin: 0.2rem;
+}
+body .button {
+  cursor: pointer;
+  text-decoration: none !important;
+  outline: none !important;
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+  line-height: 1.5em;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 1px #0066a2, -2px 2px 1px #0066a2, 2px -2px 1px #0066a2, -2px -2px 1px #0066a2, 0px 2px 1px #0066a2, 0px -2px 1px #0066a2, 0px 4px 1px #004a87, 2px 4px 1px #004a87, -2px 4px 1px #004a87;
+  border: none;
+  margin: 25px 25px 35px;
+  background: repeating-linear-gradient(45deg, #215389, #215389 5px, #093550 5px, #093550 10px);
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 8px 15px 10px;
+  box-shadow: 0 6px 0 #266b91, 0 8px 1px 1px rgba(0, 0, 0, 0.3), 0 10px 0 5px #12517d, 0 12px 0 5px #1a6b9a, 0 15px 0 5px #0c405e, 0 15px 1px 6px rgba(0, 0, 0, 0.3);
+}
+body .button:hover {
+  top: 2px;
+  box-shadow: 0 4px 0 #CFCA43, 0 6px 1px 1px rgba(0, 0, 0, 0.3), 0 8px 0 5px #CFCA43, 0 10px 0 5px #1a6b9a, 0 13px 0 5px #0c405e, 0 13px 1px 6px rgba(0, 0, 0, 0.3);
 }/*# sourceMappingURL=style.css.map */
