@@ -2,7 +2,7 @@ const player1: string = "P";
 const player2: string = "B";
 let currentPlayer: string = player1;
 let gameOver: boolean = false;
-let board: string[][]; 
+let board: string[][];
 const rows: number = 6;
 const columns: number = 7;
 const start: HTMLButtonElement | null = document.getElementById("start") as HTMLButtonElement;
@@ -59,25 +59,20 @@ function setPiece(event: MouseEvent): void {
 
   // Split the ID to get the row and column indices
   const coordinates = tile.id.split("-");
-  const r: number = parseInt(coordinates[0], 10);
   const c: number = parseInt(coordinates[1], 10);
-
-  // Add error handling for cases where the tile is already occupied
-  if (board[r][c] !== ' ') {
-    alert("This spot is already taken. Choose another one.");
+  //start searching from the bottom row
+  let r: number = rows - 1;
+  //if the cell is occupied move up to place the piece
+  while (r >= 0 && board[r][c] !== ' ') { r--; }
+  //if the column is full alert player
+  if (r < 0) {
+    alert("No room in the inn! Choose somewhere else..");
     return;
   }
-
-  // Update the board state
   board[r][c] = currentPlayer;
-
-  // Set the class for the tile based on the current player
-  if (currentPlayer === player1) {
-    tile.classList.add("redPiece");
-  } else {
-    tile.classList.add("yellowPiece");
-  }
-
+  const fillTile = document.getElementById(r.toString() + "-" + c.toString());
+  if (fillTile) { if (currentPlayer === player1) { fillTile.classList.add("redPiece"); } else { fillTile.classList.add("yellowPiece"); } }
+  
   // Switch the current player
   currentPlayer = (currentPlayer === player1) ? player2 : player1;
 }
