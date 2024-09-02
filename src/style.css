@@ -4,39 +4,17 @@ body {
   background: rgb(45, 81, 119);
   text-align: center;
   margin: auto;
-  /* ul {
-      display: grid;
-      place-items: center;
-
-  }
-
-  ul p {
-      margin: 5px;
-      width: 75px;
-      height: 75px;
-      border: 2px solid black;
-      border-radius: 100px;
-      background-color: white;
-  }
-
-  ul:hover {
-      cursor: pointer;
-      background-color: rgb(98, 136, 238);
-  }*/
 }
-body h1 {
+
+h1,
+h2 {
   text-align: center;
-  margin: 20px 0 20px 0;
+  margin: 1.25rem 0;
   color: #CFCA43;
   font-family: "Press Start 2P", system-ui;
 }
-body h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #CFCA43;
-  font-family: "Press Start 2P", system-ui;
-}
-body #board {
+
+#board {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(7, 1fr);
@@ -45,32 +23,43 @@ body #board {
   border-radius: 5%;
   margin: auto;
 }
-body .tile {
+
+.tile {
   height: 3.5rem;
   width: 3.5rem;
   background-color: whitesmoke;
   border-radius: 50%;
-  border: 1px solid gray;
+  border: 0.06rem solid gray;
   margin: 0.2rem;
 }
-body .button {
+
+.redPiece {
+  background-color: red;
+}
+
+.yellowPiece {
+  background-color: yellow;
+}
+
+.button {
   cursor: pointer;
-  text-decoration: none !important;
-  outline: none !important;
+  text-decoration: none;
+  outline: none;
   font-family: "Press Start 2P", cursive;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1.5em;
   letter-spacing: 0.1em;
-  text-shadow: 2px 1px #0066a2, -2px 2px 1px #0066a2, 2px -2px 1px #0066a2, -2px -2px 1px #0066a2, 0px 2px 1px #0066a2, 0px -2px 1px #0066a2, 0px 4px 1px #004a87, 2px 4px 1px #004a87, -2px 4px 1px #004a87;
+  text-shadow: 0.125rem 0.06rem #0066a2, -0.125rem 0.125rem 0.06rem #0066a2, 0.125rem -0.125rem 0.06rem #0066a2, -0.125rem -0.125rem 0.06rem #0066a2, 0rem 0.125rem 0.06rem #0066a2, 0rem -0.125 0.06rem #0066a2, 0rem 0.25rem 0.06rem #004a87, 0.125rem 0.25rem 0.06rem #004a87, -0.125rem 0.25rem 0.06rem #004a87;
   border: none;
-  margin: 25px 25px 35px;
-  background: repeating-linear-gradient(45deg, #215389, #215389 5px, #093550 5px, #093550 10px);
-  color: #fff !important;
-  border-radius: 8px;
-  padding: 8px 15px 10px;
-  box-shadow: 0 6px 0 #266b91, 0 8px 1px 1px rgba(0, 0, 0, 0.3), 0 10px 0 5px #12517d, 0 12px 0 5px #1a6b9a, 0 15px 0 5px #0c405e, 0 15px 1px 6px rgba(0, 0, 0, 0.3);
+  margin: 1.56rem 1.56rem 2.18rem;
+  background: repeating-linear-gradient(45deg, #215389, #215389 0.31rem, #093550 0.31rem, #093550 0.625rem);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.93rem 0.625rem;
+  box-shadow: 0 0.375rem 0 #266b91, 0 0.5rem 0.063rem 0.063rem rgba(0, 0, 0, 0.3), 0 0.625rem 0 0.313rem #12517d, 0 0.75rem 0 0.313rem #1a6b9a, 0rem 0.938rem 0rem 0.313rem #0c405e, 0 0.938rem 0.06rem 0.375rem rgba(0, 0, 0, 0.3);
 }
-body .button:hover {
-  top: 2px;
-  box-shadow: 0 4px 0 #CFCA43, 0 6px 1px 1px rgba(0, 0, 0, 0.3), 0 8px 0 5px #CFCA43, 0 10px 0 5px #1a6b9a, 0 13px 0 5px #0c405e, 0 13px 1px 6px rgba(0, 0, 0, 0.3);
+.button:hover {
+  position: relative;
+  top: 0.125rem;
+  box-shadow: 0 0.25rem 0 #CFCA43, 0 0.375rem 0.063rem 0.063rem rgba(0, 0, 0, 0.3), 0 0.5rem 0 0.313rem #CFCA43, 0 0.625rem 0 0.313rem #1a6b9a, 0 0.813rem 0 0.313rem #0c405e, 0 0.813rem 0.063rem 0.375rem rgba(0, 0, 0, 0.3);
 }/*# sourceMappingURL=style.css.map */
