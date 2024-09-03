@@ -8,7 +8,6 @@ const columns: number = 7;
 const startButton: HTMLButtonElement | null = document.getElementById("start") as HTMLButtonElement;
 let resetButton: HTMLButtonElement | null = null;
 
-
 // Click button to start game and display board
 startButton?.addEventListener("click", setGame);
 
@@ -66,20 +65,26 @@ function setPiece(event: MouseEvent): void {
   // Split the tile ID to get the row and column indices as numbers not strings
   const coordinates = tile.id.split("-");
   const c: number = parseInt(coordinates[1], 10);
-  //start searching from the bottom row
+  // Start searching from the bottom row
   let r: number = rows - 1;
-  //if the cell is occupied move up to place the piece
+  // If the cell is occupied move up to place the piece
   while (r >= 0 && board[r][c] !== ' ') { r--; }
-  //if the column is full alert player
+  // If the column is full alert player
   if (r < 0) {
     alert("No room in the inn! Choose somewhere else..");
     return;
   }
   board[r][c] = currentPlayer;
   const fillTile = document.getElementById(r.toString() + "-" + c.toString());
-  if (fillTile) { if (currentPlayer === player1) { fillTile.classList.add("redPiece"); } else { fillTile.classList.add("yellowPiece"); } }
+  if (fillTile) { 
+    if (currentPlayer === player1) { 
+      fillTile.classList.add("redPiece"); 
+    } else { 
+      fillTile.classList.add("yellowPiece"); 
+    } 
+  }
 
-  // Display the Reset button after the first piece is placed and not with an empty board
+  // Display the Reset button after the first piece is placed
   if (!resetButton) {
     resetButton = document.createElement("button");
     resetButton.textContent = "Reset Game";
@@ -87,12 +92,14 @@ function setPiece(event: MouseEvent): void {
     resetButton.addEventListener("click", confirmReset);
     document.body.appendChild(resetButton);
   }
+
   // Switch the current player after each piece is set
   currentPlayer = (currentPlayer === player1) ? player2 : player1;
-  checkWinner()
+  checkWinner();
 }
+
 function checkWinner() {
-  //check for horizontal wins
+  // Check for horizontal wins
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns - 3; c++) {
       if (board[r][c] != " ") {
@@ -104,7 +111,7 @@ function checkWinner() {
       }
     }
   }
-  //check for vertical wins
+  // Check for vertical wins
   for (let c = 0; c < columns; c++) {
     for (let r = 0; r < rows - 3; r++) {
       if (board[r][c] != " ") {
@@ -116,8 +123,8 @@ function checkWinner() {
       }
     }
   }
-  //check for diagonal wins
-  //top to bottom, left to right 
+  // Check for diagonal wins
+  // Top to bottom, left to right 
   for (let r = 0; r < rows - 3; r++) {
     for (let c = 0; c < columns - 3; c++) {
       if (board[r][c] != " ") {
@@ -129,8 +136,8 @@ function checkWinner() {
       }
     }
   }
-  //bottom to top left to right
-  for (let r = 0; r < rows; r++) {
+  // Bottom to top left to right
+  for (let r = 3; r < rows; r++) {
     for (let c = 0; c < columns - 3; c++) {
       if (board[r][c] != " ") {
         if (board[r][c] == board[r - 1][c + 1] && board[r - 1][c + 1] == board[r - 2][c + 2] && board[r - 2][c + 2] == board[r - 3][c + 3]) {
@@ -141,23 +148,61 @@ function checkWinner() {
     }
   }
 }
+
 function setWinner(r: number, c: number): void {
+  const winnerOverlay = document.getElementById("winnerOverlay");
+  const winnerMessage = document.getElementById("winnerMessage");
+  const newGameButton = document.getElementById("newGameButton");
+  const homeButton = document.getElementById("homeButton");
 
-  let winner = document.getElementById("winner");
-  if (!winner) {
-    winner = document.createElement("div");
-    winner.setAttribute("id", "winner");
-    document.body.appendChild(winner);
+  if (!winnerOverlay || !winnerMessage || !newGameButton || !homeButton) return;
+
+  // Display the winner message
+  if (board[r][c] === player1) {
+    winnerMessage.innerHTML = "Red wins!";
+  } else {
+    winnerMessage.innerHTML = "Yellow wins!";
   }
-  if (board[r][c] == player1) { 
-    winner.innerHTML = "Red wins!" 
-  } else { 
-      winner.innerHTML = "Yellow wins!" 
 
-  document.body.appendChild(winner);
-
+  // Show the overlay
+  winnerOverlay.classList.remove("overlay--hidden");
   gameOver = true;
-}}
+
+  // Add an event listener to the "New Game" button
+  newGameButton.addEventListener("click", newGame);
+  homeButton.addEventListener("click", reloadPage);
+}
+
+// Function to reset the game
+function newGame(): void {
+  // Hide the overlay
+  const winnerOverlay = document.getElementById("winnerOverlay");
+  if (winnerOverlay) {
+    winnerOverlay.classList.add("overlay--hidden");
+  }
+  
+  // Clear the board and reset variables
+  const gameBoard = document.getElementById("board");
+  if (gameBoard) {
+    gameBoard.remove();
+  }
+
+  board = [];
+  gameOver = false;
+  currentPlayer = player1;
+
+  // Remove the reset button
+  if (resetButton) {
+    resetButton.remove();
+    resetButton = null;
+  }
+
+  // Re-initialize the game board
+  setGame();
+}
+function reloadPage(): void {
+  location.reload(); 
+}
 
 // Create a prompt asking for confirmation to reset and remove after reset
 function confirmReset(): void {
@@ -188,7 +233,7 @@ function confirmReset(): void {
   document.body.appendChild(confirmationBox);
 }
 
-//prevent user being able to reset board if empty
+// Prevent user from resetting board if empty
 function resetGame(): void {
   if (isBoardEmpty()) {
     return;
@@ -211,6 +256,7 @@ function resetGame(): void {
 
   setGame();
 }
+
 // Check whether or not the board is empty before allowing reset button
 function isBoardEmpty(): boolean {
   for (let r = 0; r < rows; r++) {
@@ -222,6 +268,7 @@ function isBoardEmpty(): boolean {
   }
   return true;
 }
+
 // If the game is over, display a message and reset the board.
 //style the confirm text
 //style alerts
