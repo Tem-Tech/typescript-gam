@@ -98,6 +98,7 @@ function checkWinner() {
       if (board[r][c] != " ") {
         if (board[r][c] == board[r][c + 1] && board[r][c + 1] == board[r][c + 2] && board[r][c + 2] == board[r][c + 3]) {
           setWinner(r, c);
+          gameOver = true;
           return;
         }
       }
@@ -109,6 +110,7 @@ function checkWinner() {
       if (board[r][c] != " ") {
         if (board[r][c] == board[r + 1][c] && board[r + 1][c] == board[r + 2][c] && board[r + 2][c] == board[r + 3][c]) {
           setWinner(r, c);
+          gameOver = true;
           return;
         }
       }
@@ -121,6 +123,7 @@ function checkWinner() {
       if (board[r][c] != " ") {
         if (board[r][c] == board[r + 1][c + 1] && board[r + 1][c + 1] == board[r + 2][c + 2] && board[r + 2][c + 2] == board[r + 3][c + 3]) {
           setWinner(r, c);
+          gameOver = true;
           return;
         }
       }
@@ -140,14 +143,21 @@ function checkWinner() {
 }
 function setWinner(r: number, c: number): void {
 
-  let winner = document.createElement("div");
-  winner.setAttribute("id", "winner")
-  if (board[r][c] == player1) { winner.innerHTML = "Red wins!" } else { winner.innerHTML = "Yellow wins!" }
+  let winner = document.getElementById("winner");
+  if (!winner) {
+    winner = document.createElement("div");
+    winner.setAttribute("id", "winner");
+    document.body.appendChild(winner);
+  }
+  if (board[r][c] == player1) { 
+    winner.innerHTML = "Red wins!" 
+  } else { 
+      winner.innerHTML = "Yellow wins!" 
 
   document.body.appendChild(winner);
 
   gameOver = true;
-}
+}}
 
 // Create a prompt asking for confirmation to reset and remove after reset
 function confirmReset(): void {
@@ -219,3 +229,7 @@ function isBoardEmpty(): boolean {
 // add computer or 2 player mode
 // add reminder for a player if taking too long
 //current player display
+//winner overlay message
+//stop anymore pices being added when there's a winner
+//set piece animation
+//sound effects for placing 
