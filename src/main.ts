@@ -89,7 +89,34 @@ function setPiece(event: MouseEvent): void {
   }
   // Switch the current player after each piece is set
   currentPlayer = (currentPlayer === player1) ? player2 : player1;
+  checkWinner()
 }
+function checkWinner() {
+  //check for horizontal wins
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns - 3; c++) {
+      if (board[r][c] != " ") {
+        if (board[r][c] == board[r][c + 1] && board[r][c + 1] == board[r][c + 2] && board[r][c + 2] == board[r][c + 3]) {
+          setWinner(r, c);
+          return;
+        }
+      }
+    }
+  }
+  //check for vertical wins
+  //check for diagonal wins
+}
+function setWinner(r: number, c: number): void {
+
+  let winner = document.createElement("div");
+  winner.setAttribute("id", "winner")
+  if (board[r][c] == player1) { winner.innerHTML = "Red wins!" } else { winner.innerHTML = "Yellow wins!" }
+
+  document.body.appendChild(winner);
+
+  gameOver = true;
+}
+
 // Create a prompt asking for confirmation to reset and remove after reset
 function confirmReset(): void {
   const confirmationBox = document.createElement("div");
@@ -159,3 +186,5 @@ function isBoardEmpty(): boolean {
 //style alerts
 //style all buttons except start button
 // add computer or 2 player mode
+// add reminder for a player if taking too long
+//current player display
