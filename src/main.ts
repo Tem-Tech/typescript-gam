@@ -6,7 +6,7 @@ let board: string[][];
 const rows: number = 6;
 const columns: number = 7;
 const startButton: HTMLButtonElement | null = document.getElementById("start") as HTMLButtonElement;
-let resetButton: HTMLButtonElement | null = null; 
+let resetButton: HTMLButtonElement | null = null;
 
 
 // Click button to start game and display board
@@ -19,9 +19,9 @@ function setGame(): void {
   if (existingBoard) {
     existingBoard.remove();
   }
-     // Hide the Start Game button
-     if (startButton) {
-      startButton.style.display = "none";
+  // Hide the Start Game button
+  if (startButton) {
+    startButton.style.display = "none";
   }
 
   const game = document.createElement("div");
@@ -78,22 +78,51 @@ function setPiece(event: MouseEvent): void {
   board[r][c] = currentPlayer;
   const fillTile = document.getElementById(r.toString() + "-" + c.toString());
   if (fillTile) { if (currentPlayer === player1) { fillTile.classList.add("redPiece"); } else { fillTile.classList.add("yellowPiece"); } }
-  
-      // Display the Reset button after the first piece is placed and not with an empty board
-      if (!resetButton) {
-        resetButton = document.createElement("button");
-        resetButton.textContent = "Reset Game";
-        resetButton.className = "button";
-        resetButton.addEventListener("click", resetGame);
-        document.body.appendChild(resetButton);
-    }
+
+  // Display the Reset button after the first piece is placed and not with an empty board
+  if (!resetButton) {
+    resetButton = document.createElement("button");
+    resetButton.textContent = "Reset Game";
+    resetButton.className = "button";
+    resetButton.addEventListener("click", confirmReset);
+    document.body.appendChild(resetButton);
+  }
   // Switch the current player after each piece is set
   currentPlayer = (currentPlayer === player1) ? player2 : player1;
 }
+// Create a prompt asking for confirmation to reset and remove after reset
+function confirmReset(): void {
+  const confirmationBox = document.createElement("div");
+  confirmationBox.id = "confirmationBox";
+
+  const confirmationText = document.createElement("p");
+  confirmationText.textContent = "Type 'confirm' to confirm reset:";
+
+  const inputBox = document.createElement("input");
+  inputBox.type = "text";
+  inputBox.id = "confirmationInput";
+
+  const confirmButton = document.createElement("button");
+  confirmButton.textContent = "Confirm";
+  confirmButton.className = "button";
+  confirmButton.addEventListener("click", function () {
+    if (inputBox.value.toLowerCase() === "confirm") {
+      resetGame();
+      confirmationBox.remove();
+    } else {
+      alert("Reset canceled. Type 'confirm' to confirm.");
+    }
+  });
+  confirmationBox.appendChild(confirmationText);
+  confirmationBox.appendChild(inputBox);
+  confirmationBox.appendChild(confirmButton);
+  document.body.appendChild(confirmationBox);
+}
+
 //prevent user being able to reset board if empty
 function resetGame(): void {
   if (isBoardEmpty()) {
-      return; 
+    return;
   }
 
   gameOver = false;
@@ -102,13 +131,13 @@ function resetGame(): void {
   // Remove the pieces from the board
   const boardElement = document.getElementById("board");
   if (boardElement) {
-      boardElement.remove();
+    boardElement.remove();
   }
 
   // Hide the Reset button after resetting
   if (resetButton) {
-      resetButton.remove();
-      resetButton = null; 
+    resetButton.remove();
+    resetButton = null;
   }
 
   setGame();
@@ -116,13 +145,17 @@ function resetGame(): void {
 // Check whether or not the board is empty before allowing reset button
 function isBoardEmpty(): boolean {
   for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < columns; c++) {
-          if (board[r][c] !== ' ') {
-              return false; 
-          }
+    for (let c = 0; c < columns; c++) {
+      if (board[r][c] !== ' ') {
+        return false;
       }
+    }
   }
-  return true; 
+  return true;
 }
 // Check if a player has won after each move.
 // If the game is over, display a message and reset the board.
+//style the confirm text
+//style alerts
+//style all buttons except start button
+// add computer or 2 player mode
