@@ -39,6 +39,13 @@ window.onbeforeunload = () => {
 };
 // Click button to start game and display board
 startButton?.addEventListener("click", setGame);
+/*
+some browsers block auto play without a user interaction, this function start smusic when the gameboard is initiated as a work around
+
+startButton?.addEventListener("click", () => {
+  playSong();
+  setGame();  
+});*/
 
 // Set the board as an empty array
 function setGame(): void {

@@ -1,56 +1,65 @@
-@include small-phone{
+@import "./_media";
+
+@include small-phone {
     #board {
-        grid-template-columns: repeat(7, 1fr); /* Keep 7 columns, scale down */
-        gap: 2px; /* Smaller gap between tiles */
-        padding: 5px; /* Minimal padding around the board */
-      }
-      .tile {
-        padding-bottom: 85%; /* Adjust tile aspect ratio */
-      }
+        transform: scale(0.7);
+        width: 300px;
+        height: 470px;
+    }
+
+    .tile {
+        padding-bottom: 90%;
+        height: 2rem;
+        width: 2rem;
+    }
 }
+
 @include phone {
     #board {
-        grid-template-columns: repeat(7, 1fr);
-        gap: 4px; /* Moderate gap between tiles */
-        padding: 8px; /* Slightly more padding around the board */
-      }
-      .tile {
-        padding-bottom: 90%; /* Adjust tile aspect ratio */
-      }
+        transform: scale(0.9);
+        width: 300px;
+        height: 470px;
     }
+
+    .tile {
+        padding-bottom: 90%;
+        height: 2rem;
+        width: 2rem;
+    }
+}
 
 @include tablet {
     #board {
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px; /* Default gap for medium devices */
-        padding: 10px; /* Standard padding around the board */
-      }
-      .tile {
-        padding-bottom: 95%; /* Keep tiles square with slight padding */
-      }
+        width: 400px;
+        height: 445px;
+        gap: 0.313rem;
+        padding: 10px;
+    }
+
+    .tile {
+        height: 3rem;
+        width: 2.9rem;
+        padding-bottom: 25%;
+    }
 }
 
 
 @include tablet-landscape {
 
     #board {
+        grid-template-rows: repeat(6, 1fr);
         grid-template-columns: repeat(7, 1fr);
-        gap: 6px; /* Slightly increased gap */
-        padding: 15px; /* Additional padding for larger devices */
-      }
-      .tile {
-        padding-bottom: 100%; /* Maintain perfect square for larger screens */
-      }
+        gap: 0.375rem;
+        padding: 0.938rem;
+    }
+
+    .tile {
+        height: 4rem;
+        width: 3.5rem;
+        padding-bottom: 35%;
+        /* Maintain perfect square for larger screens */
+    }
 
 }
-@include laptop {
-    #board {
-        grid-template-columns: repeat(7, 1fr);
-        gap: 8px; /* Ample gap between tiles */
-        padding: 20px; /* Extra padding around the board */
-      }
-      .tile {
-        padding-bottom: 100%; /* Perfect square tiles */
-      }
 
-}
+@include laptop {}
