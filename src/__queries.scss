@@ -1,0 +1,56 @@
+@include small-phone{
+    #board {
+        grid-template-columns: repeat(7, 1fr); /* Keep 7 columns, scale down */
+        gap: 2px; /* Smaller gap between tiles */
+        padding: 5px; /* Minimal padding around the board */
+      }
+      .tile {
+        padding-bottom: 85%; /* Adjust tile aspect ratio */
+      }
+}
+@include phone {
+    #board {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px; /* Moderate gap between tiles */
+        padding: 8px; /* Slightly more padding around the board */
+      }
+      .tile {
+        padding-bottom: 90%; /* Adjust tile aspect ratio */
+      }
+    }
+
+@include tablet {
+    #board {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px; /* Default gap for medium devices */
+        padding: 10px; /* Standard padding around the board */
+      }
+      .tile {
+        padding-bottom: 95%; /* Keep tiles square with slight padding */
+      }
+}
+
+
+@include tablet-landscape {
+
+    #board {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px; /* Slightly increased gap */
+        padding: 15px; /* Additional padding for larger devices */
+      }
+      .tile {
+        padding-bottom: 100%; /* Maintain perfect square for larger screens */
+      }
+
+}
+@include laptop {
+    #board {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px; /* Ample gap between tiles */
+        padding: 20px; /* Extra padding around the board */
+      }
+      .tile {
+        padding-bottom: 100%; /* Perfect square tiles */
+      }
+
+}

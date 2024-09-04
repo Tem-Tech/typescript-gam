@@ -1,3 +1,5 @@
+const gameMusic: HTMLAudioElement | null = document.getElementById("gameSound") as HTMLAudioElement;
+const playSound: HTMLAudioElement | null = document.getElementById("playSound") as HTMLAudioElement;
 const player1: string = "P";
 const player2: string = "B";
 let currentPlayer: string = player1;
@@ -8,6 +10,33 @@ const columns: number = 7;
 const startButton: HTMLButtonElement | null = document.getElementById("start") as HTMLButtonElement;
 let resetButton: HTMLButtonElement | null = null;
 
+//start playing game song on load and if the browser i s refreshed by using sessionStorage to store and update the music state
+window.onload = () => {
+  playSong();
+
+  const isMusicPlaying = sessionStorage.getItem("isMusicPlaying");
+
+  if (isMusicPlaying === "true" && gameMusic) {
+    gameMusic.play();
+  }
+};
+
+function playSong(): void {
+  if (gameMusic) {
+    gameMusic.loop = true; 
+    gameMusic.play(); 
+
+    // Store music playing state in sessionStorage
+    sessionStorage.setItem("isMusicPlaying", "true");
+  }
+}
+
+// Event listener to update the state when the page is unloaded
+window.onbeforeunload = () => {
+  if (gameMusic) {
+    sessionStorage.setItem("isMusicPlaying", gameMusic.paused ? "false" : "true");
+  }
+};
 // Click button to start game and display board
 startButton?.addEventListener("click", setGame);
 
@@ -43,11 +72,19 @@ function setGame(): void {
       tile.classList.add("tile");
       // Add player pieces to tile when clicked
       tile.addEventListener("click", setPiece);
+      tile.addEventListener("click", pieceSound);
+
       // Fix the tiles to the board 
       game.appendChild(tile);
     }
     // Add the created row to the board array
     board.push(row);
+  }
+}
+
+function pieceSound(): void {
+  if (playSound) {
+    playSound.play(); 
   }
 }
 
@@ -270,13 +307,9 @@ function isBoardEmpty(): boolean {
 }
 
 // If the game is over, display a message and reset the board.
-//style the confirm text
 //style alerts
 //style all buttons except start button
 // add computer or 2 player mode
 // add reminder for a player if taking too long
 //current player display
-//winner overlay message
-//stop anymore pices being added when there's a winner
-//set piece animation
 //sound effects for placing 
